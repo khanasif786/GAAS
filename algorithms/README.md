@@ -1,18 +1,15 @@
-In this repository, we have listed some common computer vision algorithms, in order for aviation unit to accomplish certain tasks, such as:
-* Structure from Motion
-* Scene Retrieving/Loop Closing
-* Image Detection
-* Image Segmentation
-* Object Tracking
+# GAAS_contrib algorithms
 
-Each sub-repository contains a complete set of algorithms for an individual task.
-When one of these algorithms is well implemented, it will be moved into sofeware folder.
+GAAS_contrib的所有自动驾驶算法软件包.
 
+Packages of autonomous driving algorithms.
 
+### 注意:
 
-algorithms 目录主要放置一些常用的飞行器视觉处理算法。
-如SfM,回环检测/场景找回,图像目标检测，图像语义分割，物体追踪，点云滤波等。
-每个子目录放置完成相同任务的一组算法。
+检查你的cuda版本,和机器的配置.如果不需要使用cuda加速的ndt,或者不使用默认的cuda arch(使用不适当的cuda arch配置可能会引起ndt定位node崩溃),需要手动修改lidar_localization的CMakeLists.txt.
 
-这些算法完善后,会被移入software目录.
+### Pay attention:
+
+Check your cuda version and GPU of your computing platform. If you wanna disable cuda or change the version of cuda arch(which must be set correctly or may cause your ndt_localization node crash), do edit your CMakeLists.txt of lidar_localization manually!
+
 

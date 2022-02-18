@@ -1,0 +1,4 @@
+<launch>
+    <node name="astar_planner_node" pkg="global_map_planner" type="AStarPlannerNode" output="screen"/>
+</launch>
+

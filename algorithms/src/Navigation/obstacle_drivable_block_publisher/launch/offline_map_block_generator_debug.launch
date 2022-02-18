@@ -1,0 +1,3 @@
+<launch>
+    <node name="offline_map_block_generator_debug_node" pkg="obstacle_and_drivable_block_publisher" type="offline_map_block_generator_debug" output="screen"/>
+</launch>

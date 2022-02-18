@@ -1,132 +1,209 @@
-<a href="">
-    <img src="https://s2.ax1x.com/2019/01/31/k1TWUU.jpg" alt="gaas logo" title="gaas" align="right" height="100" />
-</a>
+# GAAS: Towards L5 Autonomous Flying Cars, a Robust Framework Extends GAAS with Lidars!
 
-# Generalized Autonomy Aviation System
-
-:star: Star us on GitHub — it helps!      
+![Star](https://img.shields.io/github/stars/generalized-intelligence/gaas?style=flat-square)![fork](https://img.shields.io/github/forks/generalized-intelligence/gaas?style=flat-square)![watch](https://img.shields.io/github/watchers/generalized-intelligence/gaas?style=flat-square)![BSD-3](https://img.shields.io/github/license/generalized-intelligence/gaas?style=flat-square)![twitter](https://img.shields.io/twitter/follow/GAAS_dev?style=social)
 
 
-# We have just completed the development of version 2.0 and will open source it soon :) 
+## About GAAS
 
-# 我们刚刚完成了 2.0 版本的开发，即将开源:)
+**GAAS is an open-source program designed for fully autonomous VTOL(a.k.a flying cars) and drones.** GAAS stands for Generalized Autonomy Aviation System. We hope to accelerate human use of the sky through the full autonomy of flying vehicles. This project started in 2016 as a hobby for two students. 2019 we open-source the project and hope to develop GAAS full time in the long term.
 
-  [![Join Facebook Group at https://www.facebook.com/groups/300340454189266/?ref=bookmarks](https://img.shields.io/badge/Group-Facebook-blue.svg)](https://www.facebook.com/groups/300340454189266/?ref=bookmarks) [![twitter](https://img.shields.io/twitter/follow/GAAS_dev.svg?style=social)](https://twitter.com/GAAS_dev)   [![Follow Medium at https://medium.com/generalized-intelligence](https://img.shields.io/badge/Medium-Blogs-black.svg)](https://medium.com/generalized-intelligence)
-  
-  
-[<img src = "https://s2.ax1x.com/2019/11/07/Mkwj81.png">](https://github.com/generalized-intelligence/GAAS/releases/tag/v0.7)
----
+**GAAS provides a fully autonomous flight platform based on lidar, HD-map relocalization, path planning, and other modules for aircraft.** In contrast to the autopilot technology previously available only for consumer-grade drones, GAAS aims for robust  fully autonomous flight for human-carrying, and can be easily combined with national air traffic control. At GAAS you can see many of the automotive-grade(AG) technologies that were previously only available in self-driving cars. The whole framework is coupled loosely so you can customize your own modules and easily add them to GAAS.
 
+## Previews:
 
-[<img width="280" src="https://s2.ax1x.com/2019/06/20/Vvmsld.png"/>](https://bit.ly/2Ky8VbV)
-<img src="https://s2.ax1x.com/2019/09/20/nXrXjK.png">
+![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/algorithms/preview_imgs/gaas_algorithms_rviz_preview_20200401.png)
 
-# What's new:
+![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/algorithms/preview_imgs/gaas_algorithms_astar_planning_preview_20210409.png)
 
-## Towards L5 Autonomous Flying Car: GAAS_contrib, A Robust Framework Extends GAAS with Lidars.
+![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/algorithms/preview_imgs/gaas_algorithms_rqt_graph_20200401.png)
 
-[GAAS_contrib](https://github.com/cyanine-gi/GAAS_contrib) supports some lidar-based algorithms for simulation. Now you can simulate Velodyne HDL-32 and **Livox Horizon** (a non-repeatitive lidar only cost you 800$!) with gazebo. Lidar-based perception, mapping and localization will be added, just like what happened to autonomous vehicles.
+![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/algorithms/preview_imgs/gaas_algorithms_dynamic_objects_and_replanning.png)
+
+A video has been uploaded to show the whole pipeline. You may need to download this [video](https://github.com/cyanine-gi/GAAS_contrib_resources/blob/main/demos/gaas_contrib_test1_20210419_compressed.mp4?raw=true).
 
 
-Simulation of HDL-32:
-![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/simulation/preview_imgs/Velodyne_HDL32E_sim.jpg)
+## Differences between GAAS deprecated and new GAAS:
 
-Simulation of Livox Horizon:
-![image](https://github.com/cyanine-gi/GAAS_contrib/raw/main/simulation/preview_imgs/Livox_sim.jpg)
+We use lidars, as main sensor, rather than vision algorithms.
 
 
-- [What is GAAS?](#what-is-gaas)
-  * [Tutorial for GAAS](#tutorial-for-gaas)
-  * [Installation](#installation)
-  * [Overview](#overview)
-  * [Contribute](#contribute)
-  * [Meta](#meta)
-  * [Special Thanks](#special-thanks)
-  * [中文 readme.md](https://github.com/generalized-intelligence/GAAS/blob/master/readme_zh.md)
+GAAS deprecated is based on computer vision(CV), but fully vision-algorithms-based framework is not robust enough for autonomous flying.
 
-# What is GAAS?
+For flying cars and large cargo drones, vision-based algorithms suffer from:
 
-<img src="https://s2.ax1x.com/2019/02/25/kIZ3vj.jpg" align="right" width="300px" alt="hardware">
+1. Lack of robustness, especially at night or over-exposed conditions. When air vehicles are flying at high speed, the localization is not stable enough which may cause severe accidents(vital to large air vehicles).
 
-> GAAS (Generalized Autonomy Aviation System) is an open source autonomous aviation software platform, designed for fully autonomous drones and flying cars. GAAS was built to provide a common infrastructure for computer-vision based drone intelligence. In the long term, GAAS aims to accelerate the coming of autonomous VTOLs. Being a BSD-licensed product, GAAS makes it easy for enterprises, researches, and drone enthusiasts to modify the code to suit specific use cases. 
+2. Computer vision is computationally expensive and does not easily run in real-time on mobile devices.
 
-> Our long-term vision is to implement GAAS in autonomous passenger carrying VTOLs (or "flying cars"). The first step of this vision is to make Unmanned Aerial Vehicles truly "unmanned", and thus make drones ubiquitous. We currently support manned and unmanned multi-rotor drones and helicopters. Our next step is to support VTOLs and eVTOLs.
+3. The neural network-based approach is accident-prone in extreme scenarios, and the failures are not easily reproducible.
 
-## Tutorial for GAAS
-See the [repo](https://github.com/generalized-intelligence/GAAS/tree/master/demo) and the [documentation](https://gaas.gitbook.io/guide/)
+These problems are not allowed to occur in manned flight scenarios.
 
+Therefore, the introduction of LIDAR seems to be necessary at present. That's why we make new GAAS from scratch, and refactored all modules in cpp.
 
-## Installation
-Please see [Setup.md](https://github.com/generalized-intelligence/GAAS/blob/master/Setup.md)
+## Build with:
 
-We also have a mirror form developers to install GAAS, [click here to download](https://gaas.gitbook.io/guide/handy-tools/v0.7-release-mirror-x86).
+**Tested on OS: Ubuntu 18.04; PX4(for simulation only) 1.8.0.**
 
-Trust me you won't want to install every dependencies by yourself:)
+### step<1> Check your network status
 
+    wget www.google.com
 
-## Overview
-Currently the project provides the following ten funcitons, some of which may need to be further optimized: 
+### step<2> tools
 
-NOTE: This is a beta version of the software. Please re-ensure the stability of each feature before implementing on real drones.
+(optional) install **cuda 10.2** for all **gpu-based** algorithms, like icp_lidar_localization and the gpu version of ndt_localization.
 
-<p align="center">
-<img src="https://github.com/generalized-intelligence/GAAS/blob/master/demo/gaaspole.gif"/>
+You may need to **upgrade cmake to at least 3.13** for building package icp_lidar_localization.
+
+    sudo apt install vim bwm-ng htop tmux git net-tools cmake-gui iotop curl
+
+### step<3> docker(for simulation only)
+
+    curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+
+    sudo usermod -aG docker [your username]
+
+    docker pull gaas/mavros-gazebo7-px4
+
+### step<4> ros_melodic
+
+    ./install_ros_melodic.sh
+
+### step<5> opencv 3.4.5
+
+    sudo apt install cmake-qt-gui
     
-    VISION BASED POLE AVOIDANCE BY GAAS
-</p>
+[Download opencv 3.4.5 and unzip]
 
-1. Details about automatic taking off and landing can be found in: ```software/px4_mavros_scripts```;
-2. Navigation in GPS denied environment can be found in: ```software/SLAM/ygz_slam_ros```, currently we are using stereo optical flow;
-3. Obstacle avoidance based on stereo vision can be found in: ```software/Obstacle_Map```;
-4. Path planning can be found in ```software/Navigator```;
-5. Scene recoginition, given an image, recover its position in terms of given environment, details can be found in algorithms/scene_retrieving;
-6. 3D modeling, details can be found in ```algorithms/sfm```;
-7. [Object tracking](https://youtu.be/C6902HKUVR8), details can be found in ```algorithms/object_trace_tracking```;
-8. Object detection, details can be found in ```algorithms/image_detection```;
-9. Instance segmentation, details can be found in ```algorithms/image_detection```;
-10. A list of control API based on MAVROS, and a series of tutorials can be found in ```GAAS/demo```;
-11. A list of hardware that we use is at ```GAAS/hardware```.
+    cd opencv-3.4.5/
+    mkdir build&&cd build&&cmake-gui ..
+    
+[Configure your opencv cmake options in cmake-gui]
+    
+    make -j4&&sudo make install
 
-<p align="center">
-<img src="https://s2.ax1x.com/2019/11/07/MkB8Te.png"/>
-</p>
+### step<6> glog
 
-## Contribute
-### I just want to build an autonomous drone
-You have come to the right place!
+    git clone https://github.com/google/glog.git
+    cd glog
+    git checkout -b v0.4.0
+    mkdir build&&cd build
+    cmake ..
+    make 
+    sudo make install
 
-If this is your first time building an autonomous aviation system, check out our [first Tutorial](https://github.com/generalized-intelligence/GAAS/tree/master/demo/tutorial_1). You will get a basic understanding of what MavROS, PX4 and Gazebo are, which are fundamental for the success of your autonomous drone.
+### step<7> pcl 1.8.0 build from source
 
-If you are stuck with configuration, you may:
-1. Google the error messages and see if someone else has solved a similar problem.
-2. Visit the [Issues Page](https://github.com/generalized-intelligence/GAAS/issues) to see if others have provided solutions for a similar problem.
-3. If neither Step 1 or Step 2 were able to help you, submit an issue to let the community know that you need help. 
+[Download pcl 1.8.0 and unzip]
 
-If you are an advanced user, feel free to help others to get started, contribute by solving issues, or share with us about your project on our [Gitter group chat](https://gitter.im/GAAStalk/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge). 
+    cd pcl-1.8.0
+    mkdir build&&cd build&&cmake-gui ..
 
-### I want to contribute
+[Configure your pcl cmake options in cmake-gui]
 
-We are so grateful for your interest in contributing!
+    make -j4
+    sudo make install
 
-To start contributing, you need to become familiar with PX4 and MavROS, as well as the workflow of [GitHub](https://github.com/MarcDiethelm/contributing/blob/master/README.md). 
+### step<8> (optional) upgrade your gazebo for simulation
 
-A good place to start is to look at the [open issues](https://github.com/generalized-intelligence/GAAS/issues). From there, you may choose one that interests you to tackle, or open an issue of your own to communicate with other developers. 
+    cd GAAS/simulation
+    ./upgrade_gazebo.sh
 
-PS: One of the best ways to contribute is to help others to kick off their autonomous drone journey. Pay attention to the “Configuration” label in issues page to help others get started.
-For more details, please follow [CONTRIBUTING.md](https://github.com/generalized-intelligence/GAAS/blob/master/CONTRIBUTING.md)
 
-## Meta
 
-Project initialized by Generalized Intelligence
+## Getting Started
 
-Distributed under the BSD 3-Clause license. See ``LICENSE`` for more information.
+To build the project, setup all dependencies, run:
 
-## Special Thanks
+    ./build_all.sh
 
-It is worth mentioning that we did not build everything from scratch, but on top of the solid foundations built by pioneers in the field. We would like to thank communities such as [PX4](https://px4.io) and [Dronecode](https://www.dronecode.org) for constantly pushing the industry foward. What they have built are what allowed us to build GAAS!
+To run GAAS_contrib algorithms:
 
-Also, thanks for the support from https://thone.io
+    cd algorithms
+    ./run_gaas_contrib_algorithms.sh
 
-We are also very grateful for our contributors. You may be able to find them at [AUTHORS.md](https://github.com/generalized-intelligence/GAAS/blob/master/AUTHORS.md).
+Start simulation (or play a rosbag instead):
 
-Il Vole
+    cd simulation&&./scripts/prepare_simulation.sh
+    
+or:
+
+    rosbag play --clock [path_to_your_rosbag]
+
+**And checkout your L5 flying car demo in simulation environment!**
+
+## License
+
+GAAS is under BSD 3-Clause License.
+
+## Features
+
+1. Simulation env with 32 lines lidar and stereo cameras.
+
+2. Spinning lidar mapping and NDT matching localization.
+
+Check out simulation/README.md to get more details of simulation env setup.
+
+## Roadmap:
+
+#### 1.  Gazebo simulation env construction, including spinning lidars and non-repetitive lidars and stereo cameras.
+
+(1). Livox Horizon + Forward Stereo Camera --Done.
+
+(2). Velodyne HDL-32 + Forward Stereo Camera --Done.
+
+#### 2. Accelerate compiling and deployment of GAAS.
+
+#### 3. Implement some LIDAR (mechanical/solid-state) based algorithms, and implement one key start in the simulation environment.
+
+## Checklist:
+
+(1). Lidar Points to Image Projection-- Done.
+
+(2). Euclidean Cluster Extraction. --Done.
+
+(3). Global Coordinate based HD-Map Building. --Done.
+
+(4). NDT Lidar Localization(CPU/Cuda) --Done.
+
+(5). Downsampling Node --Done.
+
+(6). A* Path Planner --Done.
+
+(7). Refactored px4 Offboard Commander --Done.
+
+(8). Dynamic Obstacles Generation and Replanning --Done.
+
+(9). Jetson AGX Xavier Adaptation --Done.
+
+(10). Interactive GUI Target Selector in HD-maps --Done.
+
+(11). Multiple Submaps Switching --TODO
+
+(12). IMU-Preintegration and High-Frequency Localization --Done.
+
+(13). VTOL Mode Switching --TODO.
+
+(14). Decentralized Robust Ground Control Station --TODO.
+
+(15). Generalized Flight Controller State Management --Done.
+
+(16). PX4 State Reporter --Done.
+
+(17). HUD Module --Done.
+
+(18). Cuda-based Multiple Lidar Pointclouds ICP Localization --Done.
+
+(19). Ground Points Removal Preprocessing --Done.
+
+(20). System State Surveillance Service --Done.
+
+(21). HTTP Server on Ground Control Station --TODO.
+
+(22). Multiple Spinning Lidar Support --Done.
+
+(23). Airsim Simulation Env Support --Done.
+
+## Current status:
+
+Adding logics for flight stage manager module. Including flight stage transfer service clients(triggered by mission config file) and servers(including localization module, flight control commander module and target navigation module.) 

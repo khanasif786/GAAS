@@ -1,0 +1,4 @@
+<launch>
+    <node name="astar_debug_node" pkg="global_map_planner" type="AStarLibDebug" output="screen"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find global_map_planner)/launch/test_astar.rviz" required="false"/>
+</launch>
